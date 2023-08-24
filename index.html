@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css
+">
+    <title>Document</title>
+</head>
+<style>
+    h1 {
+        line-height: 40px;
+    }
+
+    p {
+        line-height: 4px;
+    }
+
+    i {
+        display: inline;
+        color: yellow;
+        height: 100px;
+    }
+
+    .temp {
+        font-weight: bold;
+    }
+</style>
+
+<body>
+    <div class="container mt-4 border border-info rounded">
+        <form action="" class="row pt-3" id="form">
+            <div class="col-9">
+                <input type="text" id="search-input" class="form-control " placeholder="Type a city ...">
+                <div class="pt-4">
+                    <h1 class="text-secondary " id="location">Sydney NSW, Australia </h1>
+                    <p id="date" class="text-secondary">Wednesday 16:35</p>
+                    <p id="weather" class="text-secondary">Partly Cloudy</p>
+                </div>
+            </div>
+            <div class="col-3">
+                <input type="submit" id="submit" class="form-control bg-primary text-white">
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-6" id="cloud">
+                <div>
+                    <h2><i class="fa-solid fa-cloud-sun "></i>
+                        <span class="temp" id="temp"> </span><sup class=""><a href="#" id="to-celcius">°C </a>|<span
+                                class="text-primary"> <a href="#" id="to-fahenreit">°F</a></span></sup>
+                    </h2>
+                </div>
+            </div>
+            <div class="col-6">
+                <p class="text-secondary">Precipitation: 0%</p>
+                <p class="text-secondary">Humidity: 77%</p>
+                <p class="text-secondary">Wind: 8 km/h</p>
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/1a4d51a6f3.js" crossorigin="anonymous"></script>
+    <script>
+        let now = new Date();
+        let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        let day = now.getDay();
+        let hour = now.getHours();
+        let mins = now.getMinutes();
+        let today = document.querySelector("#date");
+
+        today.innerHTML = `${days[day]} ${hour}:${mins}`;
+        function search(event) {
+            event.preventDefault();
+            let searchTerm = document.querySelector("#search-input");
+            console.log(searchTerm.value)
+            searchTerm.innerHTML = `${searchTerm.value}`
+            let location = document.querySelector("#location");
+            location.innerHTML = `${searchTerm.value}`
+        }
+        let searchInput = document.querySelector("#form");
+        searchInput.addEventListener('submit', search)
+        let celcius = 20
+        document.querySelector("#temp").innerHTML = celcius;
+
+        function toCelciusUnit() {
+            document.querySelector("#temp").innerHTML = celcius;
+            console.log(celcius)
+
+        }
+        let temp = document.querySelector('#to-celcius');
+        temp.addEventListener('click', toCelciusUnit)
+        function toFahenreit() {
+            let fahenreit = celcius * (9 / 5) + 32;
+            document.querySelector("#temp").innerHTML = fahenreit;
+
+        }
+        let fahenreit = document.querySelector('#to-fahenreit');
+        fahenreit.addEventListener('click', toFahenreit);
+    </script>
+</body>
+
+</html>
